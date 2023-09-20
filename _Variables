@@ -1,0 +1,93 @@
+#include "shell.h"
+
+/**
+ * _puts - Prints a string
+ * @str: String to print
+ *
+ * Return: None
+ */
+void _puts(const char *str)
+{
+	if (!str)
+		return;
+
+	int i = 0;
+	while (str[i] != '\0')
+	{
+		_putchar(str[i]);
+		i++;
+	}
+}
+
+/**
+ * _strcpy - Copies a string
+ * @dest: Destination string
+ * @src: Source string
+ *
+ * Return: Pointer to the destination string
+ */
+char *_strcpy(char *dest, const char *src)
+{
+	int i = 0;
+
+	if (dest == src || src == NULL)
+		return dest;
+
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return dest;
+}
+
+/**
+ * _putchar - Writes a character to stdout
+ * @c: Character to write
+ *
+ * Return: On success, returns 1. On error, returns -1 and sets errno appropriately.
+ */
+int _putchar(char c)
+{
+	static int b = 0;
+	static char buf[WRITE_BUF_SIZE];
+
+	if (c == BUF_FLUSH || b >= WRITE_BUF_SIZE)
+	{
+		write(1, buf, b);
+		b = 0;
+	}
+
+	if (c != BUF_FLUSH)
+		buf[b++] = c;
+
+	return 1;
+}
+
+/**
+ * _strdup - Duplicates a string
+ * @str: String to duplicate
+ *
+ * Return: Pointer to the duplicated string
+ */
+char *_strdup(const char *str)
+{
+	int length = 0;
+	char *ret;
+
+	if (str == NULL)
+		return NULL;
+
+	while (str[length])
+		length++;
+
+	ret = malloc(sizeof(char) * (length + 1));
+	if (!ret)
+		return NULL;
+
+	for (int i = 0; i <= length; i++)
+		ret[i] = str[i];
+
+	return ret;
+}
